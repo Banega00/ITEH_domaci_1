@@ -1,0 +1,101 @@
+*{
+    margin:0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+} 
+
+.side-menu{
+    width: 15vw;
+    min-width: 150px;
+    max-width: 300px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.404);
+}
+
+main{
+    flex:1;
+}
+
+
+
+.ad-container{
+    width: 80%;
+    background-color: red;
+    margin:auto;
+    display: flex;
+    height: 250px;
+}
+
+.ad-container > .img-container{
+    flex:5;
+    background-color: orange;
+}
+
+.ad-container > .data-container{
+    flex:10;
+}
+
+#background-overlay{
+    display: none;
+}
+
+#background-overlay.active{
+    position: fixed;
+    display: block;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.604); 
+}
+
+#addNewAdModal{
+    display: none;
+    z-index: 1;
+}
+
+#addNewAdModal.active{
+    width: 60vw;
+    min-width: 400px;
+    height: 400px;
+    background-color: chartreuse;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display: block;
+    padding: 20px;
+}
+
+.addNewAdModalTitle{
+    text-align: center;
+}
+
+.close-modal-btn{
+    position: absolute;
+    top:0;
+    right:0;
+    background-color: red;
+    cursor: pointer;
+    padding: 20px;
+}
+
+#addNewAdModal.active > form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+#addNewAdModal.active > form > input{
+    width: 70%;
+    margin: auto;
+    min-width: 200px;
+}

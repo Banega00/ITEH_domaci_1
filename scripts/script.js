@@ -19,3 +19,32 @@ function sendRequest(method, url, callback, body, queryParams) {
 const logoutUser = () => {
     location.href = "logout.php";
 }
+
+const addNewAd = () => {
+    setOverlay(true);
+    setAddNewAdModal(true);
+}
+
+function setAddNewAdModal(active) {
+    const modal = document.querySelector('#addNewAdModal');
+    if (active) {
+        modal.classList.add('active');
+    } else {
+        modal.classList.remove('active')
+    }
+}
+
+function closeAddNewAdModal() {
+    setOverlay(false);
+    setAddNewAdModal(false);
+}
+
+function setOverlay(active) {
+    const overlay = document.querySelector('#background-overlay');
+    if (active) {
+        overlay.classList.add('active');
+    } else {
+        overlay.classList.remove('active')
+    }
+}
+

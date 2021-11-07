@@ -28,7 +28,7 @@ class User
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            $this->id = $user['id'];
+            $_SESSION['user_id'] = $user->id;
             return true;
         } else {
             return false;

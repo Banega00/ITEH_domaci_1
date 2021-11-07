@@ -30,10 +30,9 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         //successful registration
         session_start();
         $_SESSION['username'] = $user->username;
-        header('Location: index.php');
-        exit();
+        $user->login($conn); //login to set user_id
+        header('location: index.php');
     }
-    echo "ZAHTEV ZA REGISTER";
 }
 ?>
 
