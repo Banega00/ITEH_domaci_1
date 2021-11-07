@@ -11,12 +11,23 @@
 
 <body>
     <div class="form-container">
-        <form class="loginForm" action="">
-
+        <div class="form-buttons">
+            <div class="login-btn" onclick="switchForm('login')">
+                Login
+            </div>
+            <div class="register-btn" onclick="switchForm('register')">
+                Register
+            </div>
+        </div>
+        <form class="loginForm activeForm" action="">
+            LOGIN FORM
+        </form>
+        <form class="registerForm" action="">
+            REGISTER FORM
         </form>
     </div>
 
-
+    <script src="scripts/login.js"></script>
 </body>
 
 </html>

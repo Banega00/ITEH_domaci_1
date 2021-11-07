@@ -8,5 +8,31 @@
     height: 50vh;
     background-color: darkgrey;
     margin: auto;
+}
 
+.form-container > form{
+    display: none;
+}
+
+.form-container > form.activeForm{
+    display: block;
+}
+
+.form-buttons{
+    width: 100%;
+    display: flex;
+    background-color: green;
+    justify-content: space-between;
+}
+
+.form-buttons > div{
+    text-align: center;
+    color: white;
+    flex: 1;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.form-buttons > div:hover{
+    background-color: black;
 }
