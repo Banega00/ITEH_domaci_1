@@ -1,7 +1,8 @@
 <?php
 require_once('user.php');
 require_once('db_connection.php');
-
+$login_message = NULL;
+$register_message = NULL;
 if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -9,14 +10,29 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     $user = new User($username, $password);
 
     if ($user->login($conn)) {
+        //successful login
         session_start();
         $_SESSION['username'] = $user->username;
-        $_SESSION['user_id'] = $user->id;
+        header('Location: index.php');
+        exit();
+    } else {
+        $login_message = "Invalid username or password";
+    }
+} elseif (isset($_POST['register']) && isset($_POST['username']) && isset($_POST['password'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $user = new User($username, $password);
+    $result = $user->register($conn);
+    if ($result != true) {
+        //failed registration
+        $register_message = "Failed to register";
+    } else {
+        //successful registration
+        session_start();
+        $_SESSION['username'] = $user->username;
         header('Location: index.php');
         exit();
     }
-} elseif (isset($_POST['register'])) {
-    //TODO implement registraton
     echo "ZAHTEV ZA REGISTER";
 }
 ?>
@@ -43,11 +59,13 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
             </div>
         </div>
         <form method="POST" class="loginForm activeForm">
+            <div class="message"><?php echo isset($login_message) ? $login_message : '' ?></div>
             <input type="text" name="username" id="username" placeholder="Username">
             <input type="text" name="password" id="password" placeholder="Password">
             <input type="submit" value="Submit" name="login">
         </form>
         <form method="POST" class="registerForm">
+            <div class="message"><?php echo isset($register_message) ? $register_message : '' ?></div>
             <input type="text" name="username" id="username" placeholder="Username">
             <input type="text" name="password" id="password" placeholder="Password">
             <input type="submit" value="Submit" name="register">

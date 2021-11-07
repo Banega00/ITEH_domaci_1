@@ -9,14 +9,24 @@ class User
         $this->password = $password;
     }
 
+    function register($conn)
+    {
+        $sql = "INSERT INTO user VALUES (NULL, '$this->username', '$this->password')";
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return $conn->error;
+        }
+    }
+
     function login($conn)
     {
         $sql = "SELECT * FROM user WHERE username='$this->username' AND password='$this->password'";
 
-        echo $sql;
         $result = $conn->query($sql);
 
-        if ($result) {
+        if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             $this->id = $user['id'];
             return true;
