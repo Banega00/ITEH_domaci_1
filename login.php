@@ -1,3 +1,25 @@
+<?php
+require('user.php');
+require('db_connection.php');
+
+if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $user = new User($username, $password);
+
+    if ($user->login($conn)) {
+        session_start();
+        $_SESSION['username'] = $user->username;
+        $_SESSION['user_id'] = $user->id;
+        header('Location: index.php');
+        exit();
+    }
+} elseif (isset($_POST['register'])) {
+    echo "ZAHTEV ZA REGISTER";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,18 +34,22 @@
 <body>
     <div class="form-container">
         <div class="form-buttons">
-            <div class="login-btn" onclick="switchForm('login')">
+            <div class="login-btn activeFormBtn" onclick="switchForm('login')">
                 Login
             </div>
             <div class="register-btn" onclick="switchForm('register')">
                 Register
             </div>
         </div>
-        <form class="loginForm activeForm" action="">
-            LOGIN FORM
+        <form method="POST" class="loginForm activeForm">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="text" name="password" id="password" placeholder="Password">
+            <input type="submit" value="Submit" name="login">
         </form>
-        <form class="registerForm" action="">
-            REGISTER FORM
+        <form method="POST" class="registerForm">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="text" name="password" id="password" placeholder="Password">
+            <input type="submit" value="Submit" name="register">
         </form>
     </div>
 
