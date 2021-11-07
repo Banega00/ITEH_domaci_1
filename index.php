@@ -17,7 +17,8 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
     <div>PROFILE <?php echo $_SESSION['username']; ?></div>
-    <div>Log out</div>
+    <div onclick="logoutUser()">Log out</div>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>

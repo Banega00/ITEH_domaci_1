@@ -1,6 +1,6 @@
 <?php
-require('user.php');
-require('db_connection.php');
+require_once('user.php');
+require_once('db_connection.php');
 
 if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
@@ -16,6 +16,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         exit();
     }
 } elseif (isset($_POST['register'])) {
+    //TODO implement registraton
     echo "ZAHTEV ZA REGISTER";
 }
 ?>
