@@ -18,7 +18,7 @@ class Ad
 
     public static function getAds($conn)
     {
-        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId 
+        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, U.username 
         FROM ADVERTISEMENT A JOIN USER U ON U.id = A.ownerId";
 
         $result = $conn->query($sql);

@@ -26,7 +26,7 @@ class User
 
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
             var_dump($user);
             $this->id = $user['id'];

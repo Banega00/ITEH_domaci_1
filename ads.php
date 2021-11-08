@@ -2,6 +2,10 @@
 require_once('db_connection.php');
 require_once('models/ad.php');
 
+if (isset($_GET)) {
+    echo json_encode(Ad::getAds($conn));
+}
+
 if (isset($_POST['addNewAd'])) {
     session_start();
 
@@ -30,6 +34,6 @@ if (isset($_POST['addNewAd'])) {
             exit();
         };
     } else {
-        // header("location: index.php?message='Invalid request format'");
+        header("location: index.php?message='Invalid request format'");
     }
 }
