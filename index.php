@@ -1,9 +1,18 @@
 <?php
+require_once('models/ad.php');
+require_once('db_connection.php');
+
 session_start();
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
+
+if (isset($_GET['message'])) {
+    $message = $_GET['message'];
+    echo "<script>alert($message)</script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,15 +74,18 @@ if (!isset($_SESSION['username'])) {
 
     <div id="addNewAdModal">
         <div class="addNewAdModalTitle">Popunite polja ispod kako biste kreirali oglas za prodaju vozila</div>
-        <form action="">
-            <input type="text" name="ad_title" placeholder="Naslov oglasa">
-            <input type="text" name="ad_brand" placeholder="Marka vozila">
-            <input type="text" name="ad_model" placeholder="Model vozila">
-            <input type="number" name="ad_year" placeholder="Godina proizvodnje">
-            <input type="number" name="ad_price" placeholder="Cena vozila">
-            <input type="text" name="ad_contact" placeholder="Kontakt (npr. broj telefona, email)">
-
-            <input type="submit" name="addNewAdd" value="Postavi oglas" id="">
+        <form method="POST" action="addNewAd.php">
+            <input type="text" name="title" placeholder="Naslov oglasa">
+            <input type="text" name="brand" placeholder="Marka vozila">
+            <input type="text" name="model" placeholder="Model vozila">
+            <input type="number" name="year" placeholder="Godina proizvodnje">
+            <input type="number" name="price" placeholder="Cena vozila">
+            <input type="text" name="contact" placeholder="Kontakt (npr. broj telefona, email)">
+            <input type="number" name="horsePower" placeholder="Broj konjskih snaga">
+            <input type="text" name="motor" placeholder="Motor">
+            <input type="text" name="fuel" placeholder="Gorivo">
+            <textarea name="additional" cols="30" rows="10" placeholder="Dodatne informacije"></textarea>
+            <input type="submit" name="addNewAd" value="Postavi oglas" id="">
         </form>
 
         <div onclick="closeAddNewAdModal()" class="close-modal-btn">X</div>

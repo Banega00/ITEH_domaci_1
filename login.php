@@ -1,5 +1,5 @@
 <?php
-require_once('user.php');
+require_once('models/user.php');
 require_once('db_connection.php');
 $login_message = NULL;
 $register_message = NULL;
@@ -13,6 +13,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         //successful login
         session_start();
         $_SESSION['username'] = $user->username;
+        $_SESSION['user_id'] = $user->id;
         header('Location: index.php');
         exit();
     } else {
@@ -29,8 +30,9 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     } else {
         //successful registration
         session_start();
+        $user->login($conn);
         $_SESSION['username'] = $user->username;
-        $user->login($conn); //login to set user_id
+        $_SESSION['user_id'] = $user->id;
         header('location: index.php');
     }
 }
