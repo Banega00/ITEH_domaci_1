@@ -1,4 +1,12 @@
 const adsContainerElement = document.querySelector('.ads-container')
+
+//get user data from query params
+// const urlSearchParams = new URLSearchParams(window.location.search);
+// const params = Object.fromEntries(urlSearchParams.entries());
+
+// const username = params.username;
+// const email = params.email;
+
 function sendRequest(method, url, callback, body, queryParams) {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true)
@@ -35,9 +43,35 @@ function setAddNewAdModal(active) {
     }
 }
 
+
+function setEditUserDataModal(active) {
+    const modal = document.querySelector('#editUserDataModal');
+    if (active) {
+        modal.classList.add('active');
+    } else {
+        modal.classList.remove('active')
+    }
+}
+
 function closeAddNewAdModal() {
     setOverlay(false);
     setAddNewAdModal(false);
+}
+
+function editUserData() {
+    setOverlay(true);
+    setEditUserDataModal(true);
+}
+
+function closeEditUserDataModal() {
+    setOverlay(false);
+    setEditUserDataModal(false);
+}
+
+function closeModals() {
+    setOverlay(false);
+    setAddNewAdModal(false);
+    setEditUserDataModal(false);
 }
 
 function setOverlay(active) {
@@ -70,42 +104,7 @@ function getAds() {
 }
 
 function createNewAddElement(adData) {
-    const elementTemplate = `
-    <div class="ad-container">
-                <div class="img-container">
-                    OVDE IDE SLIKA
-                </div>
-                <div class="data-container">
-                    <div class="ad_title">
-                        <div class="value">${adData.title}</div>
-                    </div>
-                    <div class="ad_brand">
-                        <div class="name">Marka</div>
-                        <div class="value">${adData.marka}</div>
-                    </div>
-                    <div class="ad_model">
-                        <div class="name">Model</div>
-                        <div class="value">${adData.model}</div>
-                    </div>
-                    <div class="ad_year">
-                        <div class="name">Godiste</div>
-                        <div class="value">${adData.year}</div>
-                    </div>
-                    <div class="ad_price">
-                        <div class="name">Cena</div>
-                        <div class="value">${adData.price}</div>
-                    </div>
-                    <div class="ad_owner">
-                        <div class="name">Vlasnik</div>
-                        <div class="value">${adData.username}</div>
-                    </div>
-                    <div class="ad_contact">
-                        <div class="name">Kontakt</div>
-                        <div class="value">${adData.contact}</div>
-                    </div>
-                </div>
-            </div>
-    `;
+    const elementTemplate = '<div>AAA</div>'
 
     adsContainerElement.insertAdjacentHTML('afterend', elementTemplate)
 }

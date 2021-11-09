@@ -6,7 +6,7 @@ if (isset($_GET)) {
     echo json_encode(Ad::getAds($conn));
 }
 
-if (isset($_POST['addNewAd'])) {
+if (isset($_POST['title'])) {
     session_start();
 
     $title = $_POST['title'];

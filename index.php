@@ -51,7 +51,7 @@ if (isset($_GET['message'])) {
             </li>
             <li>
                 <div class="edit-profile-div">
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" onclick="editUserData()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
                         </svg>
@@ -86,37 +86,35 @@ if (isset($_GET['message'])) {
     <main>
         <div class="filter-div">OVDE IDE FILTER</div>
         <div class="ads-container">
-            <div class="ad-container">
-                <div class="img-container">
-                    OVDE IDE SLIKA
+            <div class="ad-div">
+                <div class="img-div">
+                    <img src="resources/images/car1.jfif" alt="">
                 </div>
-                <div class="data-container">
-                    <div class="ad_title">
-                        <div class="value">Prodajem golfa u odlicnom stanju</div>
+                <div class="vr-div"></div>
+                <div class="ad-info-div">
+                    <div class="ad-title">Ovo je naslov oglasa</div>
+                    <div class="ad-basic-info-div">
+                        <button type="button" class="btn">Ford</button>
+                        <button type="button" class="btn">Fiesta</button>
+                        <button type="button" class="btn">2011</button>
                     </div>
-                    <div class="ad_brand">
-                        <div class="name">Marka</div>
-                        <div class="value">Volkswagen</div>
-                    </div>
-                    <div class="ad_model">
-                        <div class="name">Model</div>
-                        <div class="value">Golf 3</div>
-                    </div>
-                    <div class="ad_year">
-                        <div class="name">Godiste</div>
-                        <div class="value">2011</div>
-                    </div>
-                    <div class="ad_price">
-                        <div class="name">Cena</div>
-                        <div class="value">1750e</div>
-                    </div>
-                    <div class="ad_owner">
-                        <div class="name">Vlasnik</div>
-                        <div class="value">Jeremija</div>
-                    </div>
-                    <div class="ad_contact">
-                        <div class="name">Kontakt</div>
-                        <div class="value">+38121523</div>
+                    <div class="ad-detailed-info-div">
+                        <div>Horse power: 120</div>
+                        <div class="owner-info">
+                            <div class="title">Owner</div>
+                            <div class="title">Contact</div>
+                            <div class="owner-username">Vlasnik</div>
+                            <div class="owner-phone">+381643634</div>
+                        </div>
+                        <div>Motor: 1.4TDI</div>
+                        <div>Fuel: benzin</div>
+                        <button type="button" class="btn btn-danger price-div">
+                            1250 e
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </button>
+                        <div class="additional-info-div">Dodatne informacije: sfnasnfasfnanffsnfasfsafas fasfafsafsafasfafsafsas</div>
                     </div>
                 </div>
             </div>
@@ -126,22 +124,53 @@ if (isset($_GET['message'])) {
     <div id="addNewAdModal">
         <div class="addNewAdModalTitle">Popunite polja ispod kako biste kreirali oglas za prodaju vozila</div>
         <form method="POST" action="ads.php">
-            <input type="text" name="title" placeholder="Naslov oglasa">
-            <input type="text" name="brand" placeholder="Marka vozila">
-            <input type="text" name="model" placeholder="Model vozila">
-            <input type="number" name="year" placeholder="Godina proizvodnje">
-            <input type="number" name="price" placeholder="Cena vozila">
-            <input type="text" name="contact" placeholder="Kontakt (npr. broj telefona, email)">
-            <input type="number" name="horsePower" placeholder="Broj konjskih snaga">
-            <input type="text" name="motor" placeholder="Motor">
-            <input type="text" name="fuel" placeholder="Gorivo">
+            <input type="text" name="title" placeholder="Naslov oglasa" required />
+            <input type="text" name="brand" placeholder="Marka vozila" required />
+            <input type="text" name="model" placeholder="Model vozila" required />
+            <input type="number" name="year" placeholder="Godina proizvodnje" required />
+            <input type="number" name="price" placeholder="Cena vozila" required />
+            <input type="text" name="contact" placeholder="Kontakt (npr. broj telefona, email)" required />
+            <input type="number" name="horsePower" placeholder="Broj konjskih snaga" required />
+            <input type="text" name="motor" placeholder="Motor" required />
+            <input type="text" name="fuel" placeholder="Gorivo" required />
             <textarea name="additional" cols="30" rows="10" placeholder="Dodatne informacije"></textarea>
-            <input type="submit" name="addNewAd" value="Postavi oglas" id="">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
-        <div onclick="closeAddNewAdModal()" class="close-modal-btn">X</div>
+        <button type="button" class="btn btn-danger close-modal-btn" onclick="closeAddNewAdModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"></path>
+            </svg>
+        </button>
     </div>
-    <div id="background-overlay"></div>
+
+    <div id="editUserDataModal">
+        <div class="editUserDataModal">Promenite podatke o vašem profilu</div>
+        <form method="POST" action="users.php">
+            <label for="username">Trenutni username</label>
+            <input type="text" name="username" id="username" value="<?php echo $_SESSION['username']; ?>">
+
+            <label for="username">Trenutni email</label>
+            <input type="text" name="email" id="email" value="<?php echo $_SESSION['email']; ?>">
+            <button type="submit" class="btn btn-primary">Sačuvaj</button>
+        </form>
+        <hr>
+        <div class="editUserDataModal">Promenite šifru</div>
+        <form method="POST" action="users.php">
+            <label for="old-password">Stara šifra</label>
+            <input type="password" name="old-password" id="old-password">
+
+            <label for="new-password">Nova šifra</label>
+            <input type="password" name="new-password" id="new-password">
+            <button type="submit" class="btn btn-primary">Promeni šifru</button>
+        </form>
+        <button type="button" class="btn btn-danger close-modal-btn" onclick="closeEditUserDataModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="background-overlay" onclick="closeModals()"></div>
     <script src="scripts/script.js"></script>
 </body>
 

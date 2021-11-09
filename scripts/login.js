@@ -1,20 +1,18 @@
-const forms = document.querySelectorAll('.form-container > form')
-const formsBtns = document.querySelectorAll('.form-buttons > div')
+$(function() {
 
-const switchForm = (formType) => {
-    if (formType === "login") {
-        if (forms[0].classList.contains("activeForm")) return;
-        forms[0].classList.add("activeForm")
-        forms[1].classList.remove("activeForm")
+    $('#login-form-link').click(function(e) {
+		$("#login-form").delay(100).fadeIn(100);
+ 		$("#register-form").fadeOut(100);
+		$('#register-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+	$('#register-form-link').click(function(e) {
+		$("#register-form").delay(100).fadeIn(100);
+ 		$("#login-form").fadeOut(100);
+		$('#login-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
 
-        formsBtns[0].classList.add('activeFormBtn')
-        formsBtns[1].classList.remove('activeFormBtn')
-    } else {
-        if (forms[1].classList.contains("activeForm")) return;
-        forms[1].classList.add("activeForm")
-        forms[0].classList.remove("activeForm")
-
-        formsBtns[1].classList.add('activeFormBtn')
-        formsBtns[0].classList.remove('activeFormBtn')
-    }
-}
+});

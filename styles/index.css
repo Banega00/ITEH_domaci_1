@@ -7,6 +7,7 @@ body{
     display: flex;
     flex-direction: row;
     width: 100vw;
+    min-height: 100vh;
     align-items: stretch;
 } 
 
@@ -20,21 +21,97 @@ main{
     min-height: 100px;
 }
 
-.ad-container{
-    width: 80%;
-    background-color: red;
-    margin:auto;
+.ads-container{
     display: flex;
-    height: 250px;
+    padding: 20px;
 }
 
-.ad-container > .img-container{
-    flex:5;
+.ad-div{
+    margin:auto;
+    border-radius: 25px;
+    box-shadow: 4px 5px 13px -3px rgba(0,0,0,0.64);
+    height: 300px;
     background-color: orange;
+    width: 90%;
+    min-width: 400px;
+    display: flex;
+    padding: 10px;
+}
+.ad-div > div.img-div{
+    /* background-color: red; */
+    border-radius: 25px;
+
 }
 
-.ad-container > .data-container{
-    flex:10;
+.ad-div > div.img-div > img{
+    border-radius: 25px;
+    flex:3;
+}
+
+.ad-div > .vr-div{
+    background-color: black;
+    width: 1.5px;
+    margin:0 10px;
+    height: 100%;
+}
+
+.ad-div > .ad-info-div{
+    flex:7;
+    background-color: rgb(158, 104, 4);
+    border-radius: 25px;
+    color:black;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+}
+
+.ad-info-div .ad-title{
+    padding: 5px;
+    padding-left: 20px;
+    font-size: 1.6em;
+    border-bottom: 1px solid white;
+}
+
+.ad-basic-info-div{
+    display: flex;
+}
+
+.ad-basic-info-div > *{
+    color:white;
+    flex:1;
+    margin:0 5px;
+    font-size: 1.4em;
+    background-color: blue;
+    border-radius: 15px;
+}
+
+.ad-detailed-info-div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    flex:1;
+    padding: 10px 0;
+}
+
+.ad-detailed-info-div  *{
+    word-wrap: break-word;
+}
+
+.owner-info{
+    display: grid;
+    grid-template: 1fr 1fr/ 1fr 1fr;
+    grid-row: span 2;
+}
+
+.additional-info-div{
+    grid-row: span 3;
+}
+
+.price-div{
+    grid-column: 2;
+    grid-row-start: 5;
+    grid-row-end: 7;
 }
 
 #background-overlay{
@@ -51,16 +128,51 @@ main{
     background-color: rgba(0, 0, 0, 0.604); 
 }
 
+#editUserDataModal{
+    display: none;
+    z-index: 1;
+}
+
+#editUserDataModal.active{
+    width: 60vw;
+    min-width: 400px;
+    height: 500px;
+    background-color: white;
+    border-radius: 20px;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display: block;
+    padding: 20px;
+}
+
 #addNewAdModal{
     display: none;
     z-index: 1;
+}
+
+.close-modal-btn{
+    position: absolute;
+    top:0;
+    right:0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 0;
+    border-bottom-left-radius: 10%;
+}
+
+#addNewAdModal .close-modal-btn > svg{
+    width: 16px;
+    height: 16px;
 }
 
 #addNewAdModal.active{
     width: 60vw;
     min-width: 400px;
     height: 400px;
-    background-color: chartreuse;
+    background-color: white;
+    border-radius: 20px;
     position: fixed;
     top:50%;
     left:50%;
@@ -73,14 +185,7 @@ main{
     text-align: center;
 }
 
-.close-modal-btn{
-    position: absolute;
-    top:0;
-    right:0;
-    background-color: red;
-    cursor: pointer;
-    padding: 20px;
-}
+
 
 #addNewAdModal.active > form{
     display: grid;
@@ -88,10 +193,15 @@ main{
     grid-template-rows: repeat(6, 1fr);
     width: 100%;
     height: 100%;
+    justify-items: center;
+
 }
 
-#addNewAdModal.active > form > input[type='submit']{
+#addNewAdModal.active > form > button[type='submit']{
     grid-column: span 2;
+    margin: 15px;
+    height: 40px;
+    width: 200px;
 }
 
 #addNewAdModal.active > form > input{
@@ -101,6 +211,14 @@ main{
 }
 
 
+#editUserDataModal.active > form{
+    display: flex;
+    flex-direction: column;
+}
+
+#editUserDataModal.active > form > *{
+    margin-bottom: 5px;
+}
 
 /* SIDE MENU */
 .side-menu{
@@ -160,3 +278,4 @@ main{
     width: 28px;
     height: 28px;
 }
+
