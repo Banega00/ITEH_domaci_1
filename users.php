@@ -4,9 +4,18 @@ require_once('models/user.php');
 
 if (isset($_POST['username']) || isset($_POST['email'])) {
     session_start();
-    $user = new User($_SESSION['username']);
-
-    header("location: index.php?message='Uspesno promenjeni podaci'");
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $user = new User();
+    $user->id = $_SESSION['user_id'];
+    $result = $user->updateUserData($conn, $username, $email);
+    if (empty($result)) {
+        if (!empty($username)) $_SESSION['username'] = $username;
+        if (!empty($email)) $_SESSION['email'] = $email;
+        header("location: index.php?message='Uspešno promenjeni podaci'");
+    } else {
+        header("location: index.php?message='$result'");
+    };
     exit();
 }
 
@@ -19,7 +28,7 @@ if (isset($_POST['old-password']) && isset($_POST['new-password'])) {
     $userId = $_SESSION['user_id'];
     $result = User::changePassword($conn, $userId, $oldPassword, $newPassword);
     if (empty($result)) {
-        header("location: index.php?message='Uspesno promenjena šifra'");
+        header("location: index.php?message='Uspešno promenjena šifra'");
     } else {
         header("location: index.php?message='$result'");
     };

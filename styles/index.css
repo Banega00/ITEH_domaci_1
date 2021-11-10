@@ -16,13 +16,46 @@ main{
 }
 
 .filter-div{
-    background-color: rgba(0, 0, 0, 0.404);
     height: 12vh;
-    min-height: 100px;
+    min-height: 90px;
+}
+
+header.filter-div{
+    padding: 5px!important;
+}
+
+.price-div, .year-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-div input, .year-div input{
+    width: 100px;
+}
+
+.price-div > div, .year-div > div{
+    margin: 0 10px;
+}
+.filter-div .first-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}
+
+.sort-div{
+    align-items: center;
+}
+
+.sort-div select{
+    height: 30px;
+    font-size: 12px;
 }
 
 .ads-container{
     display: flex;
+    flex-direction: column;
     padding: 20px;
 }
 
@@ -36,6 +69,7 @@ main{
     min-width: 400px;
     display: flex;
     padding: 10px;
+    margin-bottom: 20px;
 }
 .ad-div > div.img-div{
     /* background-color: red; */
@@ -279,3 +313,12 @@ main{
     height: 28px;
 }
 
+.search-icon{
+    margin-top:10px;
+    padding: 15px;
+}
+
+.search-icon svg{
+    width: 30px;
+    height: 30px;
+}

@@ -80,44 +80,74 @@ if (isset($_GET['message'])) {
                     </button>
                 </div>
             </li>
+            <hr>
+            <li>
+                <div>
+                    <label for="">Sortiraj po:</label>
+                    <select id="sort-select" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="sortAds()">
+                        <option value="price" selected>Cena</option>
+                        <option value="year">Godina</option>
+                        <option value="horsePower">Broj konjskih snaga</option>
+                        <option value="data_created">Datum oglasa</option>
+                    </select>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrderRadio" id="sortOrderRadio1" value="asc" onchange="sortAds()">
+                        <label class="form-check-label" for="sortOrderRadio1">
+                            Rastuće
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrderRadio" id="sortOrderRadio2" value="desc" checked onchange="sortAds()">
+                        <label class="form-check-label" for="sortOrderRadio2">
+                            Opadajuće
+                        </label>
+                    </div>
+                </div>
+            </li>
         </ul>
         <hr>
     </div>
     <main>
-        <div class="filter-div">OVDE IDE FILTER</div>
-        <div class="ads-container">
-            <div class="ad-div">
-                <div class="img-div">
-                    <img src="resources/images/car1.jfif" alt="">
-                </div>
-                <div class="vr-div"></div>
-                <div class="ad-info-div">
-                    <div class="ad-title">Ovo je naslov oglasa</div>
-                    <div class="ad-basic-info-div">
-                        <button type="button" class="btn">Ford</button>
-                        <button type="button" class="btn">Fiesta</button>
-                        <button type="button" class="btn">2011</button>
-                    </div>
-                    <div class="ad-detailed-info-div">
-                        <div>Horse power: 120</div>
-                        <div class="owner-info">
-                            <div class="title">Owner</div>
-                            <div class="title">Contact</div>
-                            <div class="owner-username">Vlasnik</div>
-                            <div class="owner-phone">+381643634</div>
+        <header class="filter-div p-3 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+                    <div class="first-row">
+                        <div>
+                            <label for="">Marka</label>
+                            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                         </div>
-                        <div>Motor: 1.4TDI</div>
-                        <div>Fuel: benzin</div>
-                        <button type="button" class="btn btn-danger price-div">
-                            1250 e
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
-                                <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        <div class="price-div">
+                            <div>
+                                <label for="">Cena od</label>
+                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            </div>
+                            <div>
+                                <label for="">Cena do</label>
+                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            </div>
+                        </div>
+                        <div class="year-div">
+                            <div>
+                                <label for="">Godina od</label>
+                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            </div>
+                            <div>
+                                <label for="">Godina do</label>
+                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            </div>
+                        </div>
+                        <button type="button" class="search-icon btn btn-success" onclick="filterAds()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                             </svg>
                         </button>
-                        <div class="additional-info-div">Dodatne informacije: sfnasnfasfnanffsnfasfsafas fasfafsafsafasfafsafsas</div>
                     </div>
                 </div>
             </div>
+        </header>
+        <div class="ads-container">
+
         </div>
     </main>
 
@@ -144,7 +174,7 @@ if (isset($_GET['message'])) {
     </div>
 
     <div id="editUserDataModal">
-        <div class="editUserDataModal">Promenite podatke o vašem profilu</div>
+        <div class="editUserDataModal"><strong>Promenite podatke o vašem profilu</strong></div>
         <form method="POST" action="users.php">
             <label for="username">Trenutni username</label>
             <input type="text" name="username" id="username" value="<?php echo $_SESSION['username']; ?>">
@@ -154,7 +184,7 @@ if (isset($_GET['message'])) {
             <button type="submit" class="btn btn-primary">Sačuvaj</button>
         </form>
         <hr>
-        <div class="editUserDataModal">Promenite šifru</div>
+        <div class="editUserDataModal"><strong>Promenite šifru</strong></div>
         <form method="POST" action="users.php">
             <label for="old-password">Stara šifra</label>
             <input type="password" name="old-password" id="old-password">

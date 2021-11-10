@@ -10,6 +10,24 @@ class User
         $this->email = $email;
     }
 
+    public function updateUserData($conn, $username, $email)
+    {
+        // $sql = "UPDATE user SET FROM user WHERE id='$this->id' AND password='$oldPassword'";
+        $sql = "UPDATE user ";
+        if (!empty($username)) $sql .= "SET username='$username' ";
+        if (!empty($email)) $sql .= ",email='$email' ";
+        $sql .= "WHERE id='$this->id'";
+
+        $result = $conn->query($sql);
+        echo "SQL: $sql";
+        echo "RESULT: $result";
+        if ($result) {
+            return '';
+        } else {
+            return $conn->error;
+        }
+    }
+
     public static function changePassword($conn, $userId, $oldPassword, $newPassword)
     {
         $sql = "SELECT * FROM user WHERE id='$userId' AND password='$oldPassword'";
