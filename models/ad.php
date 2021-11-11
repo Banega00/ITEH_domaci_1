@@ -20,7 +20,7 @@ class Ad
 
     public static function getAds($conn)
     {
-        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.image, A.date_created, U.username 
+        $sql = "SELECT A.id, A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.image, A.date_created, U.username 
         FROM ADVERTISEMENT A JOIN USER U ON U.id = A.ownerId";
 
         $result = $conn->query($sql);
@@ -47,9 +47,20 @@ class Ad
         }
     }
 
+    public static function deleteAd($conn, $adId)
+    {
+        $sql = "DELETE FROM advertisement WHERE id='$adId'";
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return $conn->error;
+        }
+    }
+
     public static function filterAds($conn, $brand, $priceFrom, $priceTo, $yearFrom, $yearTo)
     {
-        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.date_created, U.username 
+        $sql = "SELECT A.id, A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.date_created, U.username 
         FROM ADVERTISEMENT A JOIN USER U ON U.id = A.ownerId WHERE 1=1";
 
 

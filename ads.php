@@ -6,6 +6,20 @@ if (isset($_GET['getAll'])) {
     echo json_encode(Ad::getAds($conn));
 }
 
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $data = file_get_contents("php://input");
+    $adId = json_decode($data);
+    $adId = $adId->id;
+    $result = Ad::deleteAd($conn, $adId);
+    if ($result) {
+        echo "Success";
+    } else {
+        echo "Greška: " . $result;
+    };
+}
+
 if (isset($_POST['title'])) {
     session_start();
 

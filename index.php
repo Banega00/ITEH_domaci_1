@@ -208,7 +208,16 @@ if (isset($_GET['message'])) {
             </svg>
         </button>
     </div>
+    <div id="deleteAdModal">
+        <div class="question">
+            Da li ste sigurni da želite da obrišete reklamu?
+        </div>
+        <div class='buttons'>
+            <button type="button" class="btn btn-danger" onclick="deleteAd(); popDeleteAdModal(false)">Da</button>
+            <button type="button" class="btn btn-dark" onclick="popDeleteAdModal(false)">Odustani</button>
+        </div>
 
+    </div>
     <div id="background-overlay" onclick="closeModals()"></div>
     <script src="scripts/script.js"></script>
 </body>
