@@ -115,26 +115,26 @@ if (isset($_GET['message'])) {
                     <div class="first-row">
                         <div>
                             <label for="">Marka</label>
-                            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            <input id="filter-brand" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                         </div>
                         <div class="price-div">
                             <div>
                                 <label for="">Cena od</label>
-                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                <input id="filter-priceFrom" type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                             </div>
                             <div>
                                 <label for="">Cena do</label>
-                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                <input id="filter-priceTo" type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                             </div>
                         </div>
                         <div class="year-div">
                             <div>
                                 <label for="">Godina od</label>
-                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                <input id="filter-yearFrom" type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                             </div>
                             <div>
                                 <label for="">Godina do</label>
-                                <input type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                                <input id="filter-yearTo" type="number" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                             </div>
                         </div>
                         <button type="button" class="search-icon btn btn-success" onclick="filterAds()">

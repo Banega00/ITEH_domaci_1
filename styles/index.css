@@ -9,6 +9,7 @@ body{
     width: 100vw;
     min-height: 100vh;
     align-items: stretch;
+    overflow-x: hidden;
 } 
 
 main{
@@ -63,8 +64,8 @@ header.filter-div{
     margin:auto;
     border-radius: 25px;
     box-shadow: 4px 5px 13px -3px rgba(0,0,0,0.64);
-    height: 300px;
-    background-color: orange;
+    height: auto;
+    background-color: #1f04b8;
     width: 90%;
     min-width: 400px;
     display: flex;
@@ -83,7 +84,7 @@ header.filter-div{
 }
 
 .ad-div > .vr-div{
-    background-color: black;
+    background-color: rgb(114, 172, 226);
     width: 1.5px;
     margin:0 10px;
     height: 100%;
@@ -91,13 +92,13 @@ header.filter-div{
 
 .ad-div > .ad-info-div{
     flex:7;
-    background-color: rgb(158, 104, 4);
+    background-color: rgb(1, 33, 122);
     border-radius: 25px;
     color:black;
     display: flex;
     flex-direction: column;
     padding: 10px;
-
+    box-shadow: 0px 0px 5px 2px #000000;
 }
 
 .ad-info-div .ad-title{
@@ -105,6 +106,7 @@ header.filter-div{
     padding-left: 20px;
     font-size: 1.6em;
     border-bottom: 1px solid white;
+    color: white;
 }
 
 .ad-basic-info-div{
@@ -117,15 +119,31 @@ header.filter-div{
     margin:0 5px;
     font-size: 1.4em;
     background-color: blue;
-    border-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .ad-detailed-info-div{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 2px;
     flex:1;
     padding: 10px 0;
+    color: white;
+}
+
+.ad-detailed-info-div > *:not([type="button"]) {
+    border-radius: 5px;
+    background: #3211ee;
+    background-origin: content-box;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.ad-detailed-info-div > .additional-info-div{
+    align-items: flex-start;
 }
 
 .ad-detailed-info-div  *{
@@ -139,13 +157,39 @@ header.filter-div{
 }
 
 .additional-info-div{
-    grid-row: span 3;
+    grid-column: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
 }
 
-.price-div{
+.ad-detailed-info-div .price-div{
     grid-column: 2;
-    grid-row-start: 5;
-    grid-row-end: 7;
+    grid-row:5;
+    font-size: 1.4rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.ad-detailed-info-div .price-div > div{
+    flex:1;
+}
+
+.ad-detailed-info-div .price-div svg{
+    width: 25px;
+    height: 25px;
+}
+
+.ad-detailed-info-div .date-div{
+    display: flex;
+    align-items: center;
+    grid-row: 5;
+    font-size: 1.3em;
+    grid-column: 1;
+}
+
+.ad-detailed-info-div .date-div > div{
+    flex: 1;
 }
 
 #background-overlay{

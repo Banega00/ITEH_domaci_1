@@ -2,7 +2,7 @@
 require_once('db_connection.php');
 require_once('models/ad.php');
 
-if (isset($_GET)) {
+if (isset($_GET['getAll'])) {
     echo json_encode(Ad::getAds($conn));
 }
 
@@ -36,4 +36,15 @@ if (isset($_POST['title'])) {
     } else {
         header("location: index.php?message='Invalid request format'");
     }
+}
+
+if (isset($_GET['filter'])) {
+    echo json_encode(Ad::filterAds(
+        $conn,
+        $_POST['brand'],
+        $_POST['priceFrom'],
+        $_POST['priceTo'],
+        $_POST['yearFrom'],
+        $_POST['yearTo'],
+    ));
 }

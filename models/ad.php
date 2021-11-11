@@ -45,4 +45,41 @@ class Ad
             return $conn->error;
         }
     }
+
+    public static function filterAds($conn, $brand, $priceFrom, $priceTo, $yearFrom, $yearTo)
+    {
+        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.date_created, U.username 
+        FROM ADVERTISEMENT A JOIN USER U ON U.id = A.ownerId WHERE 1=1";
+
+
+        if (!empty($brand)) {
+            $brand = strtolower($brand);
+            $sql .= " AND LOWER(A.brand) LIKE '%$brand%'";
+        }
+        if (!empty($priceFrom)) {
+            $priceFrom = (int)$priceFrom;
+            $sql .= " AND A.price >= $priceFrom";
+        }
+        if (!empty($priceTo)) {
+            $priceTo = (int)$priceTo;
+            $sql .= " AND A.price <= $priceTo";
+        }
+        if (!empty($yearFrom)) {
+            $yearFrom = (int)$yearFrom;
+            $sql .= " AND A.year >= $yearFrom";
+        }
+        if (!empty($yearTo)) {
+            $yearTo = (int)$yearTo;
+            $sql .= " AND A.year <= $yearTo";
+        }
+
+        $result = $conn->query($sql);
+        $array = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            return $array;
+        }
+    }
 }
