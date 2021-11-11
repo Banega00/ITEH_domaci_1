@@ -4,13 +4,14 @@
 }
 
 body{
-    display: flex;
-    flex-direction: row;
     width: 100vw;
     min-height: 100vh;
-    align-items: stretch;
     overflow-x: hidden;
 } 
+
+body > div{
+    display: flex;
+}
 
 main{
     flex:1;
@@ -78,9 +79,16 @@ header.filter-div{
 
 }
 
-.ad-div > div.img-div > img{
+.ad-div > div.img-div img{
     border-radius: 25px;
-    flex:3;
+    object-fit: cover;
+    width: 100%!important;
+}
+
+.ad-div > div.img-div {
+    flex: 3;
+    max-width: 30%;
+
 }
 
 .ad-div > .vr-div{
@@ -107,6 +115,20 @@ header.filter-div{
     font-size: 1.6em;
     border-bottom: 1px solid white;
     color: white;
+    display: flex;
+}
+
+.ad-info-div .ad-title > div{
+    flex:1;
+}
+
+.ad-info-div .ad-title > button{
+    margin:0 5px;
+}
+
+.ad-info-div .ad-title > button > svg{
+    width: 100%;
+    height: 100%;
 }
 
 .ad-basic-info-div{
@@ -118,7 +140,7 @@ header.filter-div{
     flex:1;
     margin:0 5px;
     font-size: 1.4em;
-    background-color: blue;
+    background-color: black;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -275,6 +297,33 @@ header.filter-div{
 
 }
 
+.files-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.files-div label{
+    background-color: rgb(153, 151, 182);
+    width: 70%;
+    color: white;
+    border: 1px solid black;
+    font-size: 1.2em;
+}
+
+.files-div label:hover{
+    color:blue;
+}
+
+.files-div input{
+    display: none;
+}
+
+#addNewAdModal.active > form > textarea[name="additional"]{
+    grid-row: span 2;
+    width: 100%;
+}
+
 #addNewAdModal.active > form > button[type='submit']{
     grid-column: span 2;
     margin: 15px;
@@ -305,6 +354,17 @@ header.filter-div{
     max-width: 300px;
     background-color: rgba(0, 0, 0, 0.404);
     padding: 10px;
+    position: relative;
+}
+
+.side-menu > div{
+    position: fixed;
+    width: 15vw
+}
+
+
+.side-menu > div > *{
+    width: 100%;
 }
 
 .username-div{

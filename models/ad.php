@@ -1,7 +1,7 @@
 <?php
 class Ad
 {
-    public function __construct($title, $brand, $model, $year, $price, $contact, $horsePower, $motor, $fuel, $additional, $ownerId)
+    public function __construct($title, $brand, $model, $year, $price, $contact, $horsePower, $motor, $fuel, $additional, $imageName, $ownerId)
     {
         $this->title = $title;
         $this->brand = $brand;
@@ -14,12 +14,13 @@ class Ad
         $this->fuel = $fuel;
         $this->additional = $additional;
         $this->ownerId = $ownerId;
+        $this->imageName = $imageName;
     }
 
 
     public static function getAds($conn)
     {
-        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.date_created, U.username 
+        $sql = "SELECT A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.image, A.date_created, U.username 
         FROM ADVERTISEMENT A JOIN USER U ON U.id = A.ownerId";
 
         $result = $conn->query($sql);
@@ -37,7 +38,7 @@ class Ad
         $sql = "INSERT INTO advertisement 
         VALUES (NULL, '$this->title', '$this->brand', '$this->model', '$this->year',
         '$this->price','$this->contact','$this->horsePower','$this->motor','$this->fuel',
-        '$this->additional','$this->ownerId', NOW())";
+        '$this->additional','$this->ownerId', NOW(), '$this->imageName')";
 
         if ($conn->query($sql) === TRUE) {
             return true;
