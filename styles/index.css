@@ -145,7 +145,7 @@ header.filter-div{
     border-bottom-right-radius: 15px;
 }
 
-.ad-basic-info-div > *:hover{
+.ad-basic-info-div > button:hover{
     color:red;
     font-weight: 500;
 }

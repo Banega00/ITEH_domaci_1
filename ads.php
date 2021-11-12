@@ -21,24 +21,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 }
 
 if (isset($_POST['title']) && isset($_POST['id'])) {
-    $id = $_POST['id'];
-    $title = $_POST['title'];
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $year = $_POST['year'];
-    $price = $_POST['price'];
-    $contact = $_POST['contact'];
-    $horsePower = $_POST['horsePower'];
-    $motor = $_POST['motor'];
-    $fuel = $_POST['fuel'];
-    $additional = $_POST['additional'];
+    $id = sanitizeInputData($_POST['id']);
+    $title = sanitizeInputData($_POST['title']);
+    $brand = sanitizeInputData($_POST['brand']);
+    $model = sanitizeInputData($_POST['model']);
+    $year = sanitizeInputData($_POST['year']);
+    $price = sanitizeInputData($_POST['price']);
+    $contact = sanitizeInputData($_POST['contact']);
+    $horsePower = sanitizeInputData($_POST['horsePower']);
+    $motor = sanitizeInputData($_POST['motor']);
+    $fuel = sanitizeInputData($_POST['fuel']);
+    $additional = sanitizeInputData($_POST['additional']);
 
-    $image = $_FILES['image2'];
+    $imageName = null;
+    if (isset($$_FILES['image2'])) {
+        $image = $_FILES['image2'];
 
-    $image_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
-    $image['name'] = guidv4() . '.' . $image_extension;
-    move_uploaded_file($image['tmp_name'], './resources/images/ad_images/' . $image['name']);
-    $imageName = $image['name'];
+        $image_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $image['name'] = guidv4() . '.' . $image_extension;
+        move_uploaded_file($image['tmp_name'], './resources/images/ad_images/' . $image['name']);
+        $imageName = $image['name'];
+    }
     $ad = new Ad($title, $brand, $model, $year, $price, $contact, $horsePower, $motor, $fuel, $additional, $imageName, null);
     $result = $ad->update($conn, $id);
 
@@ -52,17 +55,17 @@ if (isset($_POST['title']) && isset($_POST['id'])) {
 if (isset($_POST['title']) && !isset($_POST['id'])) {
     session_start();
 
-    $title = $_POST['title'];
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $year = $_POST['year'];
-    $price = $_POST['price'];
-    $contact = $_POST['contact'];
-    $horsePower = $_POST['horsePower'];
-    $motor = $_POST['motor'];
-    $fuel = $_POST['fuel'];
-    $additional = $_POST['additional'];
-    $ownerId = $_SESSION['user_id'];
+    $title = sanitizeInputData($_POST['title']);
+    $brand = sanitizeInputData($_POST['brand']);
+    $model = sanitizeInputData($_POST['model']);
+    $year = sanitizeInputData($_POST['year']);
+    $price = sanitizeInputData($_POST['price']);
+    $contact = sanitizeInputData($_POST['contact']);
+    $horsePower = sanitizeInputData($_POST['horsePower']);
+    $motor = sanitizeInputData($_POST['motor']);
+    $fuel = sanitizeInputData($_POST['fuel']);
+    $additional = sanitizeInputData($_POST['additional']);
+    $ownerId = sanitizeInputData($_SESSION['user_id']);
     $image = $_FILES['image'];
 
     $image_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
@@ -90,12 +93,20 @@ if (isset($_POST['title']) && !isset($_POST['id'])) {
 if (isset($_GET['filter'])) {
     echo json_encode(Ad::filterAds(
         $conn,
-        $_POST['brand'],
-        $_POST['priceFrom'],
-        $_POST['priceTo'],
-        $_POST['yearFrom'],
-        $_POST['yearTo'],
+        sanitizeInputData($_POST['brand']),
+        sanitizeInputData($_POST['priceFrom']),
+        sanitizeInputData($_POST['priceTo']),
+        sanitizeInputData($_POST['yearFrom']),
+        sanitizeInputData($_POST['yearTo'])
     ));
+}
+
+function sanitizeInputData($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 

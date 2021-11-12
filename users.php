@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
 if (isset($_POST['username']) || isset($_POST['email'])) {
     session_start();
-    $username = $_POST['username'];
-    $email = $_POST['email'];
+    $username = sanitizeInputData($_POST['username']);
+    $email = sanitizeInputData($_POST['email']);
     $user = new User();
     $user->id = $_SESSION['user_id'];
     $result = $user->updateUserData($conn, $username, $email);
@@ -32,8 +32,8 @@ if (isset($_POST['username']) || isset($_POST['email'])) {
 }
 
 if (isset($_POST['old-password']) && isset($_POST['new-password'])) {
-    $oldPassword = $_POST['old-password'];
-    $newPassword = $_POST['new-password'];
+    $oldPassword = sanitizeInputData($_POST['old-password']);
+    $newPassword = sanitizeInputData($_POST['new-password']);
 
 
     session_start();
@@ -45,4 +45,12 @@ if (isset($_POST['old-password']) && isset($_POST['new-password'])) {
         header("location: index.php?message='$result'");
     };
     exit();
+}
+
+function sanitizeInputData($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }

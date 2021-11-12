@@ -90,7 +90,7 @@ if (isset($_GET['message'])) {
                                 <option value="price" selected>Cena</option>
                                 <option value="year">Godina</option>
                                 <option value="horsePower">Broj konjskih snaga</option>
-                                <option value="data_created">Datum oglasa</option>
+                                <option value="date_created">Datum oglasa</option>
                             </select>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="sortOrderRadio" id="sortOrderRadio1" value="asc" onchange="sortAds()">
@@ -173,7 +173,7 @@ if (isset($_GET['message'])) {
                 <label for="files" class="btn">Dodaj sliku</label>
                 <input type="file" id="files" name="image" accept=".img, .jpeg, .jpg, .png, .jfif" value="Dodaj sliku" required />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Sačuvaj</button>
         </form>
         <button type="button" class="btn btn-danger close-modal-btn" onclick="closeAddNewAdModal()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
@@ -200,7 +200,7 @@ if (isset($_GET['message'])) {
                 <label for="files-edit" class="btn">Dodaj sliku</label>
                 <input type="file" id="files-edit" name="image2" accept=".img, .jpeg, .jpg, .png, .jfif" value="Dodaj sliku" />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Sačuvaj</button>
         </form>
         <button type="button" class="btn btn-danger close-modal-btn" onclick="popEditAdModal(false)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">

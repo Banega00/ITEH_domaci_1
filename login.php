@@ -4,8 +4,8 @@ require_once('db_connection.php');
 $login_message = NULL;
 $register_message = NULL;
 if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = sanitizeInputData($_POST['username']);
+    $password = sanitizeInputData($_POST['password']);
 
     $user = new User($username, $password);
 
@@ -21,10 +21,10 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         $login_message = "Pogrešno korisničko ime ili šifra";
     }
 } elseif (isset($_POST['register']) && isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirm-password'];
-    $email = $_POST['email'];
+    $username = sanitizeInputData($_POST['username']);
+    $password = sanitizeInputData($_POST['password']);
+    $confirmPassword = sanitizeInputData($_POST['confirm-password']);
+    $email = sanitizeInputData($_POST['email']);
 
     if (empty($username) || empty($password) || empty($email) || empty($confirmPassword)) {
         $register_message = "Morate popuniti sva polja";

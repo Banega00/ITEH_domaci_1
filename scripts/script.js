@@ -253,7 +253,7 @@ function createNewAddElement(ad) {
                         <div>Konjske snage: ${ad.horsePower}</div>
                         <div>Motor: ${ad.motor}</div>
                         <div>Gorivo: ${ad.fuel}</div>
-                        <div class="owner-div">Owner: ${ad.username}</div>
+                        <div class="owner-div">Vlasnik: ${ad.username}</div>
                         <div class="contact-div">Kontakt: ${ad.contact}</div>
                         <button type="button" class="btn btn-danger price-div">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
@@ -285,18 +285,34 @@ function sortAds() {
 
     const sortOrder = document.querySelector('input[name="sortOrderRadio"]:checked').value;
 
-    ads.sort((a, b) => {
-        aValue = parseInt(a[sortingParametar])
-        bValue = parseInt(b[sortingParametar])
-        if (sortOrder == 'asc') {
-            return aValue < bValue ? -1 : 1;
-        } else if (sortOrder == 'desc') {
-            return aValue > bValue ? -1 : 1;
-        } else {
-            return 0;
-        }
-    })
-
+    if (sortingParametar == 'date_created') {
+        console.log("SORTIRAM");
+        ads.sort((a, b) => {
+            aValue = new Date(a[sortingParametar])
+            bValue = new Date(b[sortingParametar])
+            console.log(aValue);
+            console.log(bValue);
+            if (sortOrder == 'asc') {
+                return aValue < bValue ? -1 : 1;
+            } else if (sortOrder == 'desc') {
+                return aValue > bValue ? -1 : 1;
+            } else {
+                return 0;
+            }
+        })
+    } else {
+        ads.sort((a, b) => {
+            aValue = parseInt(a[sortingParametar])
+            bValue = parseInt(b[sortingParametar])
+            if (sortOrder == 'asc') {
+                return aValue < bValue ? -1 : 1;
+            } else if (sortOrder == 'desc') {
+                return aValue > bValue ? -1 : 1;
+            } else {
+                return 0;
+            }
+        })
+    }
     rerenderAds();
 }
 
