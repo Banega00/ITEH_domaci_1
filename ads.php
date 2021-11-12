@@ -20,7 +20,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     };
 }
 
-if (isset($_POST['title'])) {
+if (isset($_POST['title']) && isset($_POST['id'])) {
+    $id = $_POST['id'];
+    $title = $_POST['title'];
+    $brand = $_POST['brand'];
+    $model = $_POST['model'];
+    $year = $_POST['year'];
+    $price = $_POST['price'];
+    $contact = $_POST['contact'];
+    $horsePower = $_POST['horsePower'];
+    $motor = $_POST['motor'];
+    $fuel = $_POST['fuel'];
+    $additional = $_POST['additional'];
+
+    $image = $_FILES['image2'];
+
+    $image_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+    $image['name'] = guidv4() . '.' . $image_extension;
+    move_uploaded_file($image['tmp_name'], './resources/images/ad_images/' . $image['name']);
+    $imageName = $image['name'];
+    $ad = new Ad($title, $brand, $model, $year, $price, $contact, $horsePower, $motor, $fuel, $additional, $imageName, null);
+    $result = $ad->update($conn, $id);
+
+    if ($result) {
+        header("Location: index.php?message='Oglas je uspešno promenjen'");
+    } else {
+        header("Location: index.php?message='Greška prilikom izmene oglasa'");
+    }
+}
+
+if (isset($_POST['title']) && !isset($_POST['id'])) {
     session_start();
 
     $title = $_POST['title'];

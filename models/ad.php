@@ -29,8 +29,8 @@ class Ad
             while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
-            return $array;
         }
+        return $array;
     }
 
     public function insert($conn)
@@ -58,9 +58,36 @@ class Ad
         }
     }
 
+    public function update($conn, $id)
+    {
+        $sql = "UPDATE advertisement SET";
+
+        $sql .= " title='$this->title'";
+        $sql .= ", brand='$this->brand'";
+        $sql .= ", model='$this->model'";
+        $sql .= ", year='$this->year'";
+        $sql .= ", price='$this->price'";
+        $sql .= ", contact='$this->contact'";
+        $sql .= ", horsePower='$this->horsePower'";
+        $sql .= ", motor='$this->motor'";
+        $sql .= ", fuel='$this->fuel'";
+        $sql .= ", additional='$this->additional'";
+
+        if (!empty($this->imageName)) {
+            $sql .= ", image='$this->imageName'";
+        }
+        $sql .= " WHERE id='$id';";
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return $conn->error;
+        }
+    }
+
     public static function filterAds($conn, $brand, $priceFrom, $priceTo, $yearFrom, $yearTo)
     {
-        $sql = "SELECT A.id, A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.date_created, U.username 
+        $sql = "SELECT A.id, A.title, A.brand, A.model, A.year, A.price, A.contact, A.horsePower, A.motor, A.fuel, A.additional, A.ownerId, A.date_created, A.image, U.username 
         FROM ADVERTISEMENT A JOIN USER U ON U.id = A.ownerId WHERE 1=1";
 
 

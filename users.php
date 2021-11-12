@@ -2,6 +2,18 @@
 require_once('db_connection.php');
 require_once('models/user.php');
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    session_start();
+    $id = $_SESSION['user_id'];
+    $result = User::deleteUser($conn, $id);
+    if ($result) {
+        echo "Success";
+    } else {
+        echo "Greška: " . $result;
+    };
+}
+
 if (isset($_POST['username']) || isset($_POST['email'])) {
     session_start();
     $username = $_POST['username'];

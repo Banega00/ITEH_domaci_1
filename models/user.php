@@ -10,6 +10,21 @@ class User
         $this->email = $email;
     }
 
+    public static function deleteUser($conn, $id)
+    {
+        $sql = "DELETE FROM user WHERE id='$id'";
+        $result1 = $conn->query($sql);
+
+        $sql = "DELETE FROM advertisement WHERE ownerId='$id'";
+
+        $result2 = $conn->query($sql);
+        if ($result1 && $result2) {
+            return true;
+        } else {
+            return $conn->error;
+        }
+    }
+
     public function updateUserData($conn, $username, $email)
     {
         // $sql = "UPDATE user SET FROM user WHERE id='$this->id' AND password='$oldPassword'";

@@ -63,7 +63,7 @@ if (isset($_GET['message'])) {
                     </li>
                     <li>
                         <div class="delete-profile-div">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" onclick="popDeleteProfileModal(true)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
                                 </svg>
@@ -182,6 +182,33 @@ if (isset($_GET['message'])) {
         </button>
     </div>
 
+    <div id="editAdModal">
+        <div class="addNewAdModalTitle">Popunite polja ispod kako biste kreirali oglas za prodaju vozila</div>
+        <form method="POST" action="ads.php" enctype="multipart/form-data">
+            <input type="text" name="id" hidden placeholder="id" required />
+            <input type="text" name="title" placeholder="Naslov oglasa" required />
+            <input type="text" name="brand" placeholder="Marka vozila" required />
+            <input type="text" name="model" placeholder="Model vozila" required />
+            <input type="number" name="year" placeholder="Godina proizvodnje" required />
+            <input type="number" name="price" placeholder="Cena vozila" required />
+            <input type="text" name="contact" placeholder="Kontakt (npr. broj telefona, email)" required />
+            <input type="number" name="horsePower" placeholder="Broj konjskih snaga" required />
+            <input type="text" name="motor" placeholder="Motor" required />
+            <input type="text" name="fuel" placeholder="Gorivo" required />
+            <textarea name="additional" cols="30" rows="10" placeholder="Dodatne informacije"></textarea>
+            <div class="files-div">
+                <label for="files-edit" class="btn">Dodaj sliku</label>
+                <input type="file" id="files-edit" name="image2" accept=".img, .jpeg, .jpg, .png, .jfif" value="Dodaj sliku" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <button type="button" class="btn btn-danger close-modal-btn" onclick="popEditAdModal(false)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"></path>
+            </svg>
+        </button>
+    </div>
+
     <div id="editUserDataModal">
         <div class="editUserDataModal"><strong>Promenite podatke o vašem profilu</strong></div>
         <form method="POST" action="users.php">
@@ -216,7 +243,17 @@ if (isset($_GET['message'])) {
             <button type="button" class="btn btn-danger" onclick="deleteAd(); popDeleteAdModal(false)">Da</button>
             <button type="button" class="btn btn-dark" onclick="popDeleteAdModal(false)">Odustani</button>
         </div>
-
+    </div>
+    <div id="deleteProfileModal">
+        <div class="question">
+            Da li ste sigurni da želite da obrišete obrišete profil?
+            <br>
+            Ukoliko obrišete profil, sve vaše raklame će takođe biti obrisane
+        </div>
+        <div class='buttons'>
+            <button type="button" class="btn btn-danger" onclick="deleteProfile(); popDeleteProfileModal(false)">Da</button>
+            <button type="button" class="btn btn-dark" onclick="popDeleteProfileModal(false)">Odustani</button>
+        </div>
     </div>
     <div id="background-overlay" onclick="closeModals()"></div>
     <script src="scripts/script.js"></script>
