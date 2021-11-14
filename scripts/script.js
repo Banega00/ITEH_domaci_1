@@ -26,7 +26,6 @@ function sendRequest(method, url, callback, body, queryParams) {
     //TODO: implement query params
     xhr.onload = function () {
         if (xhr.status == 200) {
-            console.log(xhr.responseText == "Ok")
             console.log("Successful request");
         } else {
             console.log(`Error with xml http request: ${xhr}`)
@@ -206,9 +205,7 @@ function getAds() {
             try {
                 response = JSON.parse(response);
                 ads = response;
-                response.forEach(ad => {
-                    createNewAddElement(ad)
-                });
+                sortAds();
             } catch (error) {
                 console.log(`Error parsing response from server: ${error}`);
                 return;
@@ -286,12 +283,9 @@ function sortAds() {
     const sortOrder = document.querySelector('input[name="sortOrderRadio"]:checked').value;
 
     if (sortingParametar == 'date_created') {
-        console.log("SORTIRAM");
         ads.sort((a, b) => {
             aValue = new Date(a[sortingParametar])
             bValue = new Date(b[sortingParametar])
-            console.log(aValue);
-            console.log(bValue);
             if (sortOrder == 'asc') {
                 return aValue < bValue ? -1 : 1;
             } else if (sortOrder == 'desc') {

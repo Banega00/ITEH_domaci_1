@@ -47,6 +47,14 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         }
     }
 }
+
+function sanitizeInputData($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 ?>
 
 
@@ -61,7 +69,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="styles/login.css">
-    <title>Login</title>
+    <title>Login | Automobili.com</title>
 </head>
 
 <body>

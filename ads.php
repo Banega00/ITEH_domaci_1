@@ -79,7 +79,7 @@ if (isset($_POST['title']) && !isset($_POST['id'])) {
     ) {
         $ad = new Ad($title, $brand, $model, $year, $price, $contact, $horsePower, $motor, $fuel, $additional, $imageName, $ownerId);
         if ($ad->insert($conn)) {
-            header("location: index.php?message='Successfully added new advertisement for viechle'");
+            header("location: index.php?message='Oglas za vozilo je uspešno postavljen'");
             exit();
         } else {
             header("location: index.php?message='Error adding new advertisement'");
